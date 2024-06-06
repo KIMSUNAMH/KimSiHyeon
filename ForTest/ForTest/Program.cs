@@ -38,10 +38,10 @@ namespace ForTest
             2 * 9 = 18
 */
 
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine("2*" + i + "=" + i * 2);
-            }
+            /*    for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine("2*" + i + "=" + i * 2);
+                }*/
             #endregion
 
 
@@ -76,26 +76,26 @@ namespace ForTest
              17
              7*/
 
-           /* string str = Console.ReadLine();
+            /* string str = Console.ReadLine();
 
-            int T = int.Parse(str);
+             int T = int.Parse(str);
 
-            int num1;
+             int num1;
 
-            int num2;
+             int num2;
 
 
-            for (int i = 0; i < T; i++)
-            {
-                string[] strs = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.None);
+             for (int i = 0; i < T; i++)
+             {
+                 string[] strs = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.None);
 
-                num1 = int.Parse(strs[0]);
-                num2 = int.Parse(strs[1]);
+                 num1 = int.Parse(strs[0]);
+                 num2 = int.Parse(strs[1]);
 
-                Console.WriteLine(num1 + num2);
+                 Console.WriteLine(num1 + num2);
 
-            }
-*/
+             }
+ */
             #endregion
 
             #region 세번째 문제
@@ -117,15 +117,15 @@ namespace ForTest
              예제 출력 1
              6*/
 
-           /* int n = int.Parse(Console.ReadLine());
+            /* int n = int.Parse(Console.ReadLine());
 
-            int sum = 0;
+             int sum = 0;
 
-            for (int i = 1; i <= n; i++)
-            {
-                sum += i;
+             for (int i = 1; i <= n; i++)
+             {
+                 sum += i;
 
-            }*/
+             }*/
             /*Console.WriteLine(sum);*/
 
             #endregion
@@ -185,38 +185,176 @@ namespace ForTest
              5000 8
              예제 출력 2
              No*/
+            /*
+                        int X = int.Parse(Console.ReadLine());
 
-            int X = int.Parse(Console.ReadLine());
+                        int N = int.Parse(Console.ReadLine());
 
-            int N = int.Parse(Console.ReadLine());
+                        int a;
 
-            int a;
+                        int b;
 
-            int b;
+                        int sum = 0;
 
-            int sum = 0;
+                        for (int i = 0; i < N; i++)
+                        {
+                            string[] strs = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.None);
 
-            for (int i = 0; i < N; i++)
+                            a = int.Parse(strs[0]);
+                            b = int.Parse(strs[1]);
+
+                            sum += a * b;
+
+                        }
+
+                        if (sum == X)
+                        {
+                            Console.WriteLine("YES");
+                        }
+                        else
+                        {
+                            Console.WriteLine("NO");
+                        }
+            */
+            #endregion
+
+            #region 다섯번째 문제
+            /*
+                        코딩은 체육과목 입니다
+                        시간 제한 메모리 제한 제출  정답 맞힌 사람 정답 비율
+                        0.5 초(추가 시간 없음)    1024 MB(추가 메모리 없음) 84646   53751   48690   64.245 %
+                        문제
+
+
+                        오늘은 혜아의 면접 날이다. 면접 준비를 열심히 해서 앞선 질문들을 잘 대답한 혜아는 이제 마지막으로 칠판에 직접 코딩하는 문제를 받았다. 혜아가 받은 문제는 두 수를 더하는 문제였다.C++ 책을 열심히 읽었던 혜아는 간단히 두 수를 더하는 코드를 칠판에 적었다.코드를 본 면접관은 다음 질문을 했다. “만약, 입출력이
+                        $N$바이트 크기의 정수라면 프로그램을 어떻게 구현해야 할까요 ?”
+
+                        혜아는 책에 있는 정수 자료형과 관련된 내용을 기억해 냈다.책에는 long int는 
+                        $4$바이트 정수까지 저장할 수 있는 정수 자료형이고 long long int는 
+                        $8$바이트 정수까지 저장할 수 있는 정수 자료형이라고 적혀 있었다.혜아는 이런 생각이 들었다. “int 앞에 long을 하나씩 더 붙일 때마다
+                        $4$바이트씩 저장할 수 있는 공간이 늘어나는 걸까? 분명 long long long int는 
+                        $12$바이트, long long long long int는 
+                        $16$바이트까지 저장할 수 있는 정수 자료형일 거야!” 그렇게 혜아는 당황하는 면접관의 얼굴을 뒤로한 채 칠판에 정수 자료형을 써 내려가기 시작했다.
+
+                        혜아가
+                        $N$바이트 정수까지 저장할 수 있다고 생각해서 칠판에 쓴 정수 자료형의 이름은 무엇일까?
+
+                        입력
+                        첫 번째 줄에는 문제의 정수 
+                        $N$이 주어진다. 
+                        $(4\le N\le 1\, 000$; 
+                        $N$은
+                        $4$의 배수
+                        $)$ 
+
+                        출력
+                        혜아가 
+                        $N$바이트 정수까지 저장할 수 있다고 생각하는 정수 자료형의 이름을 출력하여라.
+
+                        예제 입력 1
+                        4
+                        예제 출력 1
+                        long int
+                        예제 입력 2
+                        20
+                        예제 출력 2
+                        long long long long long int
+            */
+
+             int N = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < N / 4;  i++)
             {
-                string[] strs = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.None);
-
-                a = int.Parse(strs[0]);
-                b = int.Parse(strs[1]);
-
-                sum += a * b;
-
+                Console.Write(" long");
             }
+            Console.WriteLine(" int");
 
-            if (sum == X)
+            #endregion
+
+
+
+            #region 여섯번째 문제
+
+            /*별 찍기 -1
+            시간 제한   메모리 제한  제출 정답  맞힌 사람   정답 비율
+            1 초 128 MB  336374  207259  171525  62.222 %
+            문제
+            첫째 줄에는 별 1개, 둘째 줄에는 별 2개, N번째 줄에는 별 N개를 찍는 문제
+
+            입력
+            첫째 줄에 N(1 ≤ N ≤ 100)이 주어진다.
+
+            출력
+            첫째 줄부터 N번째 줄까지 차례대로 별을 출력한다.
+
+            예제 입력 1
+            5
+            예제 출력 1
+            *
+            **
+            ***
+            ****
+            *****
+*/
+
+            /*    int N = int.Parse(Console.ReadLine());
+
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j <= i; j++)
+                    {
+                        Console.Write("*");
+                    }
+                    Console.WriteLine();
+                }*/
+
+            #endregion
+
+
+            #region 일곱번째 문제
+            /*
+                        별 찍기 -2
+                        시간 제한   메모리 제한  제출 정답  맞힌 사람   정답 비율
+                        1 초 128 MB  333282  185899  156734  55.995 %
+                        문제
+                        첫째 줄에는 별 1개, 둘째 줄에는 별 2개, N번째 줄에는 별 N개를 찍는 문제
+
+                        하지만, 오른쪽을 기준으로 정렬한 별(예제 참고)을 출력하시오.
+
+                        입력
+                        첫째 줄에 N(1 ≤ N ≤ 100)이 주어진다.
+
+                        출력
+                        첫째 줄부터 N번째 줄까지 차례대로 별을 출력한다.
+
+                        예제 입력 1
+                        5
+                        예제 출력 1
+                            *
+                           **
+                          ***
+                         ****
+                        ******/
+
+
+/*
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine("YES");
-            }
-            else
-            {
-                Console.WriteLine("NO");
-            }
-
-
+                for (int j = 4; j >= 0; j--)
+                {
+                    if (i<j)
+                    {
+                        Console.Write(" "); // 0<4 , 0<3 , 0<2 , 0<1 , (0<0)
+                                             //1<4 , 1<3 , 1<2 ,(1<1),(0<0)                                             
+                                             // 2<5 , 2<4 , 2<3 , (2<2), (2<1) , (2<0)
+                    }
+                    else
+                    {
+                        Console.WriteLine("*");
+                    }
+                }
+               
+            }*/
 
 
             #endregion
