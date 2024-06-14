@@ -1,0 +1,106 @@
+# Inner Join, Left Outer Join, Right Outer Join, Self Join
+
+생성일: 2024년 6월 13일 오후 9:05
+
+```sql
+CREATE TABLE TBL_USER -- 고객테이블
+(
+  USERNO INT,
+  USERNAME NVARCHAR(40),
+  PHONEUMBER NVARCHAR(40),
+  ADDRESSINFO NVARCHAR(2000),
+  PRIMARY KEY(USERNO)
+
+);
+
+CREATE TABLE TBL_ORDER -- 고객 이 구매한 물품 테이블
+(
+   USERNO INT,
+   PRODUCTNAME NVARCHAR(1000),
+   PRODUCTNUM  NVARCHAR(200)
+
+);
+
+INSERT INTO TBL_USER -- SELECT 문이랑 UNION 을 써서 인설트 하는 방법도 있다
+(
+ USERNO,
+ USERNAME,
+ PHONEUMBER,
+ ADDRESSINFO
+)
+
+SELECT 1,N'김명수','010-000-0000',N'서울시AA아파트'
+UNION ALL
+SELECT 2,N'이진수','010-003-0000',N'부산시AA아파트';
+
+INSERT INTO TBL_USER
+(
+ USERNO,
+ USERNAME,
+ PHONEUMBER,
+ ADDRESSINFO
+) 
+VALUES
+(
+  3,
+  N'홍길동',
+  '010-123-4567',
+  N'부산시AA아파트'
+
+);
+
+-- -- 고객 이 구매한 물품 테이블
+
+INSERT INTO TBL_ORDER(USERNO,PRODUCTNAME,PRODUCTNUM)VALUES(1,N'생수2L',N'3병');
+INSERT INTO TBL_ORDER(USERNO,PRODUCTNAME,PRODUCTNUM)VALUES(1,N'탄산음료500ml',N'1병');
+INSERT INTO TBL_ORDER(USERNO,PRODUCTNAME,PRODUCTNUM)VALUES(1,N'음료수AZX비타민 500ml',N'1병');
+INSERT INTO TBL_ORDER(USERNO,PRODUCTNAME,PRODUCTNUM)VALUES(2,N'음료수AZX비타민 500ml',N'3병');
+
+-- INNER JOIN
+
+SELECT A.*,B.*
+FROM TBL_USER A
+INNER JOIN TBL_ORDER B ON A.USERNO = B.USERNO;
+
+-- INNER JOIN
+SELECT A.*,B.*
+FROM TBL_USER A
+INNER JOIN TBL_ORDER B ON A.USERNO = B.USERNO
+WHERE A.USERNO = 1;
+
+---LEFT JOIN
+
+SELECT A.*,B.*
+FROM TBL_USER A
+LEFT OUTER JOIN TBL_ORDER B ON A.USERNO = B.USERNO;
+
+--  3	홍길동	010-123-4567	부산시AA아파트	NULL	NULL	NULL
+ --  이컬럼에 NULL 이 있는 이유는 TBL_ORDER 테이블 USERNO 컬럼에 3번이 없어서 TBL_USER 테이블 USERNO 컬럼에 3이랑 연결 했을때 일치하는게
+     -- TBL_ORDER 테이블에 없기 때문에 NULL 로 나오는 거다
+
+-- RIGHT OUTER JOIN
+SELECT A.*,B.*
+FROM TBL_ORDER A
+RIGHT OUTER JOIN TBL_USER B
+ON A.USERNO = B.USERNO;
+
+--Self join
+
+UPDATE TBL_USER SET PHONEUMBER = '김명수';
+
+SELECT *
+FROM TBL_USER A
+INNER JOIN TBL_USER B ON A.USERNAME = B.PHONEUMBER;
+```
+
+![Untitled](Inner%20Join,%20Left%20Outer%20Join,%20Right%20Outer%20Join,%20Sel%20df03dc7aeb654a76bf11be68d9f2ab2e/Untitled.png)
+
+![Untitled](Inner%20Join,%20Left%20Outer%20Join,%20Right%20Outer%20Join,%20Sel%20df03dc7aeb654a76bf11be68d9f2ab2e/Untitled%201.png)
+
+![Untitled](Inner%20Join,%20Left%20Outer%20Join,%20Right%20Outer%20Join,%20Sel%20df03dc7aeb654a76bf11be68d9f2ab2e/Untitled%202.png)
+
+![Untitled](Inner%20Join,%20Left%20Outer%20Join,%20Right%20Outer%20Join,%20Sel%20df03dc7aeb654a76bf11be68d9f2ab2e/Untitled%203.png)
+
+![Untitled](Inner%20Join,%20Left%20Outer%20Join,%20Right%20Outer%20Join,%20Sel%20df03dc7aeb654a76bf11be68d9f2ab2e/Untitled%204.png)
+
+![Untitled](Inner%20Join,%20Left%20Outer%20Join,%20Right%20Outer%20Join,%20Sel%20df03dc7aeb654a76bf11be68d9f2ab2e/Untitled%205.png)
