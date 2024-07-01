@@ -17,18 +17,30 @@ namespace BarcodeScan
         private SerialPort serialPort;
         private string scanBarcode;
         private string gsCode = "?";
+       
         // Gtin 부터 일련번호까지 바코 변수 생성
         String strGtin = String.Empty;
         String strExpData = String.Empty;
         String strLot = String.Empty;
         String strSn = String.Empty;
-      
+
+        
+        
+
+
+        int cnt = 0;
+
 
         public Form1()
         {
             InitializeComponent();
 
-       
+            // 프로세스바 설정 변수
+            progressBarControl1.Properties.Minimum = 0;
+            progressBarControl1.Properties.Maximum = 100;
+            progressBarControl1.Position = 0;
+
+
 
             serialPort = new SerialPort();
             {
@@ -58,8 +70,6 @@ namespace BarcodeScan
             GridControlColumnsAdd();
 
             
-
-
         }
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -77,9 +87,11 @@ namespace BarcodeScan
                      // 바코드 처리
                      BarcodeCheck(scanBarcode);
 
+                     // 바코드 처리 하면서 프로세스바 업데이트
+                     UpdateProgressBar();
                  
                  }));
-
+        
                
             }
         }
@@ -93,8 +105,28 @@ namespace BarcodeScan
 
         }
 
-     
 
+        private void UpdateProgressBar()
+        {
+            if (cnt >= 100)
+            {
+                progressBarControl1.Position = 100;
+                Item_progress.Text = "100";
+                cnt = 0;
+            }
+            else
+            {
+                cnt += 10;
+                if (cnt > 100)
+                {
+                    cnt = 10;
+                }
+                
+            }
+
+            progressBarControl1.Position = cnt;
+            Item_progress.Text = cnt.ToString();
+        }
 
         public void BarcodeCheck(String scanBarcode)
         {
