@@ -18,6 +18,11 @@ namespace ScanBarcode
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
+        FormLogin formlog = new FormLogin();
+
+        //Log4Net
+        public static readonly log4net.ILog localLog = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // 프로퍼시 속성
         private Properties.Settings Settings = new Properties.Settings();
 
@@ -29,6 +34,9 @@ namespace ScanBarcode
 
         // 작업확인 변수
         private bool ScanStart = false;
+
+        // 핸드스캐너 연결 확인
+        private bool isScannerConnected = false;
 
         // DB정보
         public ObjectClass.DatabaseConn uniDatabase;
@@ -63,6 +71,11 @@ namespace ScanBarcode
         {
             InitializeComponent();
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //InitializeComponent();
 
             // 프로그램 환경설정 ini 파일 존재여부 체크
             zrIniManager = new IniManager(SysUtils.getCurrentDir() + "\\config.ini");
@@ -89,7 +102,7 @@ namespace ScanBarcode
                     arrayWorkStauts[i++] = dRow["NAME"].ToString();
                 }
 
-                
+
             }
             StatusChange("종료");
 
@@ -116,23 +129,17 @@ namespace ScanBarcode
             try
             {
                 serialPort.Open();
+                isScannerConnected = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to open COM port :" + ex.Message);
-
+                isScannerConnected = false;
             }
-
-
 
             GridControlColumnsAdd();
 
-            
-               
-            
-
-           
-
+            localLog.Info( "프로그램" + formlog.getInteranllp());
         }
 
         // 환경설정파일
@@ -151,9 +158,27 @@ namespace ScanBarcode
         }
 
 
+        // 스캔시작 버튼
         private void btnStartWorkorder_Click(object sender, EventArgs e)
         {
+            try
+            {
+                serialPort.Open();
+                isScannerConnected = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to open COM port :" + ex.Message);
+                isScannerConnected = false;
+            }
 
+
+            if (!isScannerConnected)
+            {
+                MessageBox.Show("핸드스캐너가 연결되어 있지 않아 작업을 시작할수 없습니다");
+                return;
+            }
+           
             ScanStart = true;
             StatusChange("작업중");
             
@@ -388,6 +413,7 @@ namespace ScanBarcode
 
         }
 
+       
     }
 
 
